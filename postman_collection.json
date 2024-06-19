@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "d3a34203-6dac-480e-8aac-0dce44241f83",
+		"_postman_id": "bf7d2532-4c66-4e44-882d-de431828a58e",
 		"name": "REST API Tutorial",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33095363"
 	},
 	"item": [
 		{
@@ -42,12 +43,25 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"console.log(jsonData)",
-									"postman.setEnvironmentVariable(\"accessToken\", jsonData.accessToken);",
-									"postman.setEnvironmentVariable(\"refreshToken\", jsonData.refreshToken);"
+									"pm.test(\"Set access and refresh token variables\", function () {",
+									"    var jsonData = JSON.parse(pm.response.text());",
+									"    console.log(jsonData)",
+									"    pm.collectionVariables.set(\"accessToken\", jsonData.accessToken);",
+									"    pm.collectionVariables.set(\"refreshToken\", jsonData.refreshToken);",
+									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -83,17 +97,18 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Refresh access token\", function () {",
+									"    const newAccessToken = pm.response.headers['x-access-token']",
 									"",
-									"const newAccessToken = responseHeaders['x-access-token']",
-									"",
-									"if(newAccessToken){",
-									"    console.log('Set new access token')",
-									"postman.setEnvironmentVariable(\"accessToken\", newAccessToken);",
-									"}",
-									"",
+									"    if(newAccessToken){",
+									"        console.log('Set new access token')",
+									"        pm.collectionVariables.set(\"accessToken\", newAccessToken);",
+									"    }",
+									"});",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -136,16 +151,18 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"const newAccessToken = responseHeaders['x-access-token']",
+									"pm.test(\"Refresh access token\", function () {",
+									"    const newAccessToken = pm.response.headers['x-access-token']",
 									"",
-									"if(newAccessToken){",
-									"    console.log('Set new access token')",
-									"postman.setEnvironmentVariable(\"accessToken\", newAccessToken);",
-									"}",
-									"",
+									"    if(newAccessToken){",
+									"        console.log('Set new access token')",
+									"        pm.collectionVariables.set(\"accessToken\", newAccessToken);",
+									"    }",
+									"});",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -193,18 +210,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"productId\", jsonData.productId);",
+									"pm.test(\"Set productId and refresh access token\", function () {",
+									"    var jsonData = JSON.parse(pm.response.text());",
+									"    console.log(jsonData)",
+									"    pm.collectionVariables.set(\"productId\", jsonData.productId);",
 									"",
+									"    const newAccessToken = pm.response.headers['x-access-token']",
 									"",
-									"const newAccessToken = responseHeaders['x-access-token']",
-									"",
-									"if(newAccessToken){",
-									"    console.log('Set new access token')",
-									"postman.setEnvironmentVariable(\"accessToken\", newAccessToken);",
-									"}"
+									"    if (newAccessToken){",
+									"        console.log('Set new access token')",
+									"        pm.collectionVariables.set(\"accessToken\", newAccessToken);",
+									"    }",
+									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -298,14 +318,18 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"const newAccessToken = responseHeaders['x-access-token']",
+									"pm.test(\"Refresh access token\", function () {",
+									"    const newAccessToken = pm.response.headers['x-access-token']",
 									"",
-									"if(newAccessToken){",
-									"    console.log('Set new access token')",
-									"postman.setEnvironmentVariable(\"accessToken\", newAccessToken);",
-									"}"
+									"    if(newAccessToken){",
+									"        console.log('Set new access token')",
+									"        pm.collectionVariables.set(\"accessToken\", newAccessToken);",
+									"    }",
+									"});",
+									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -358,14 +382,18 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"const newAccessToken = responseHeaders['x-access-token']",
+									"pm.test(\"Refresh access token\", function () {",
+									"    const newAccessToken = pm.response.headers['x-access-token']",
 									"",
-									"if(newAccessToken){",
-									"    console.log('Set new access token')",
-									"postman.setEnvironmentVariable(\"accessToken\", newAccessToken);",
-									"}"
+									"    if(newAccessToken){",
+									"        console.log('Set new access token')",
+									"        pm.collectionVariables.set(\"accessToken\", newAccessToken);",
+									"    }",
+									"});",
+									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
